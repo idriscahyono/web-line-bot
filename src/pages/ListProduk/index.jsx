@@ -1,4 +1,12 @@
-import { Card, Image, Segment, Gird, CardHeader } from "semantic-ui-react";
+import {
+  Card,
+  Image,
+  Segment,
+  Gird,
+  CardHeader,
+  CardContent,
+  Button
+} from "semantic-ui-react";
 import React from "react";
 import Axios from "axios";
 
@@ -8,11 +16,23 @@ export default class ListProduk extends React.Component {
   };
 
   componentDidMount = () => {
+    this.getData();
+  };
+
+  getData = () => {
     Axios.get("http://localhost:3000/produk").then(res => {
       this.setState({
         produk: res.data
       });
     });
+  };
+
+  deleteData = id => {
+    Axios.delete(`http://localhost:3000/produk/${id}`).then(res => {});
+  };
+
+  handleButtonDeleteClick = id => {
+    this.deleteData(id);
   };
 
   handleCardClick = (produk, urlImage) => {
@@ -26,26 +46,21 @@ export default class ListProduk extends React.Component {
         <Segment basic>
           <Card.Group>
             {this.state.produk.map((produk, index) => (
-              <Card
-                centered
-                color="red"
-                onClick={() => this.handleCardClick(produk)}
-              >
-                <Image wrapped ui={true} />
-                <Card.Content>
+              <Card centered color="green">
+                <Image src={produk.image_url} wrapped ui={true} />
+                <Card.Content onClick={() => this.handleCardClick(produk)}>
                   <CardHeader>
-                    <p
-                      style={{
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        width: "260px"
-                      }}
-                    >
-                      {produk.name}
-                    </p>
+                    <p>{produk.nama}</p>
+                    <p>Stock : {produk.stock}</p>
                   </CardHeader>
                 </Card.Content>
+                <CardContent>
+                  <Button
+                    onClick={() => this.handleButtonDeleteClick(produk._id)}
+                  >
+                    Hapus Produk
+                  </Button>
+                </CardContent>
               </Card>
             ))}
           </Card.Group>

@@ -15,6 +15,7 @@ export default class CreateProduk extends React.Component {
   state = {
     nama: "",
     harga: "",
+    stock: 0,
     image: null
   };
 
@@ -30,11 +31,18 @@ export default class CreateProduk extends React.Component {
     });
   };
 
+  handleStockChange = event => {
+    this.setState({
+      stock: event.target.value
+    });
+  };
+
   handleSubmitClick = () => {
-    const { nama, harga, image } = this.state;
+    const { nama, harga, stock, image } = this.state;
     Axios.post("http://localhost:3000/produk", {
       nama,
-      harga
+      harga,
+      stock
     }).then(res => {
       const { data } = res;
       const formData = new FormData();
@@ -82,6 +90,16 @@ export default class CreateProduk extends React.Component {
                 onChange={this.handleHargaChange}
               />
             </Form.Field>
+            <Label size="large">Stock Produk</Label>
+            <Form.Field>
+              <Input
+                fluid
+                type="number"
+                value={this.state.stock}
+                placeholder="Tulis Stock"
+                onChange={this.handleStockChange}
+              />
+            </Form.Field>
             <FormField>
               <Label size="large">Gambar</Label>
               <Input type="file" onChange={this.handleFileChange} />
@@ -90,7 +108,7 @@ export default class CreateProduk extends React.Component {
               <Button
                 fluid
                 size="huge"
-                color="red"
+                color="green"
                 icon="minus"
                 onClick={this.handleSubmitClick}
               >

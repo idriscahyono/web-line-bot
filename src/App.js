@@ -34,7 +34,7 @@ export default class App extends React.Component {
             <Menu.Item
               name="List Produk"
               as={Link}
-              to="/listproduk"
+              to="/"
               active={activeItem === "List Produk"}
               onClick={this.handleItemClick}
             />
