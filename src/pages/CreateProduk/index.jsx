@@ -77,7 +77,7 @@ export default class CreateProduk extends React.Component {
               <Input
                 fluid
                 value={this.state.nama}
-                placeholder="Tulis Resep"
+                placeholder="Tulis Nama Produk"
                 onChange={this.handleNamaChange}
               />
             </Form.Field>
@@ -85,6 +85,7 @@ export default class CreateProduk extends React.Component {
             <Form.Field>
               <Input
                 fluid
+                type="number"
                 value={this.state.harga}
                 placeholder="Tulis Harga"
                 onChange={this.handleHargaChange}
