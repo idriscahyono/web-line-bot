@@ -14,7 +14,7 @@ import {
 export default class CreateProduk extends React.Component {
   state = {
     nama: "",
-    harga: "",
+    harga: 0,
     stock: 0,
     image: null
   };
@@ -53,7 +53,7 @@ export default class CreateProduk extends React.Component {
         formData
       ).then(() => {
         alert("Berhasil Menambahkan Data Baru");
-        this.props.history.push("/");
+        this.props.history.push("/listproduk");
       });
     });
   };

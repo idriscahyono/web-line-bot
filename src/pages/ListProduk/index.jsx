@@ -20,7 +20,11 @@ export default class ListProduk extends React.Component {
   };
 
   getData = () => {
-    Axios.get("http://localhost:3000/produk").then(res => {
+    Axios.get("http://localhost:3000/produk", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then(res => {
       this.setState({
         produk: res.data
       });
@@ -28,7 +32,11 @@ export default class ListProduk extends React.Component {
   };
 
   deleteData = id => {
-    Axios.delete(`http://localhost:3000/produk/${id}`).then(res => {
+    Axios.delete(`http://localhost:3000/produk/${id}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    }).then(res => {
       this.getData();
     });
   };
