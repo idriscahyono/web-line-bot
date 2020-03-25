@@ -39,11 +39,19 @@ export default class CreateProduk extends React.Component {
 
   handleSubmitClick = () => {
     const { nama, harga, stock, image } = this.state;
-    Axios.post("http://localhost:3000/produk", {
-      nama,
-      harga,
-      stock
-    }).then(res => {
+    Axios.post(
+      "http://localhost:3000/produk",
+      {
+        nama,
+        harga,
+        stock
+      },
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    ).then(res => {
       const { data } = res;
       const formData = new FormData();
       formData.append("image", this.state.image);

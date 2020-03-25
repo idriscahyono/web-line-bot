@@ -48,7 +48,7 @@ export default class App extends React.Component {
             <Menu.Item
               name="Login"
               as={Link}
-              to="/login"
+              to="/"
               active={activeItem === "Login"}
               onClick={this.handleItemClick}
             />
@@ -56,12 +56,12 @@ export default class App extends React.Component {
               position="right"
               name="logout"
               as={Link}
-              to="/login"
+              to="/"
               active={activeItem === "Logout"}
               onClick={this.handleLogout}
             />
           </Menu>
-          <Route path="/login" exact component={Login} />
+          <Route path="/" exact component={Login} />
           <Route
             path="/createproduk"
             exact
