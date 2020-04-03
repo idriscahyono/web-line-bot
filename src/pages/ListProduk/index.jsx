@@ -20,7 +20,7 @@ export default class ListProduk extends React.Component {
   };
 
   getData = () => {
-    Axios.get("http://localhost:3000/produk", {
+    Axios.get("https://backend-skripsi.herokuapp.com/produk", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -32,7 +32,7 @@ export default class ListProduk extends React.Component {
   };
 
   deleteData = id => {
-    Axios.delete(`http://localhost:3000/produk/${id}`, {
+    Axios.delete(`https://backend-skripsi.herokuapp.com/produk/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`
       }

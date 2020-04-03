@@ -13,7 +13,7 @@ export default function withAuth(ComponentToProtect) {
     }
 
     componentDidMount() {
-      Axios.get("http://localhost:3000", {
+      Axios.get("https://backend-skripsi.herokuapp.com", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`
         }
