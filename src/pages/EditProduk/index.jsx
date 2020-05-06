@@ -8,75 +8,81 @@ import {
   Grid,
   Segment,
   Label,
-  FormField
+  FormField,
 } from "semantic-ui-react";
 
-export default class CreateProduk extends React.Component {
+export default class EditProduk extends React.Component {
+  produk = this.props.location.state.produk;
   state = {
-    nama: "",
-    harga: 0,
-    stock: 0,
-    berat: 0,
-    image: null
+    id: this.produk._id,
+    nama: this.produk.nama,
+    harga: this.produk.harga,
+    stock: this.produk.stock,
+    berat: this.produk.berat,
+    urlImage: this.produk.image_url,
   };
 
-  handleNamaChange = event => {
+  handleNamaChange = (event) => {
     this.setState({
-      nama: event.target.value
+      nama: event.target.value,
     });
   };
 
-  handleHargaChange = event => {
+  handleHargaChange = (event) => {
     this.setState({
-      harga: event.target.value
+      harga: event.target.value,
     });
   };
 
-  handleStockChange = event => {
+  handleStockChange = (event) => {
     this.setState({
-      stock: event.target.value
+      stock: event.target.value,
     });
   };
 
-  handleBeratChange = event =>{
+  handleBeratChange = (event) => {
     this.setState({
-      berat: event.target.value
-    })
-  }
+      berat: event.target.value,
+    });
+  };
 
-  handleSubmitClick = () => {
+  handleSubmitClick = (id) => {
     const { nama, harga, stock, berat, image } = this.state;
-    Axios.post(
-      "http://localhost:4000/produk",
+    Axios.put(
+      `http://localhost:4000/produk/${id}`,
       {
         nama,
         harga,
         stock,
-        berat
+        berat,
       },
       {
         headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }
-    ).then(res => {
+    ).then((res) => {
       const { data } = res;
       const formData = new FormData();
       formData.append("image", this.state.image);
-
       Axios.post(
-        `http://localhost:4000/produk/${data._id}/upload`,
+        `http://localhost:4000/produk/${this.state.id}/upload`,
         formData
-      ).then(() => {
-        alert("Berhasil Menambahkan Data Baru");
-        this.props.history.push("/listproduk");
-      });
+      )
+        .then(() => {
+          alert("Berhasil Edit Data Produk");
+          this.props.history.push("/listproduk");
+        })
+        .catch(() => {
+          alert("Berhasil Edit Data Produk");
+          this.props.history.push("/listproduk");
+        });
     });
   };
 
-  handleFileChange = event => {
+  handleFileChange = (event) => {
     this.setState({
-      image: event.target.files[0]
+      image: event.target.files[0],
     });
   };
 
@@ -84,7 +90,7 @@ export default class CreateProduk extends React.Component {
     return (
       <>
         <Segment basic>
-          <h1>Tambahkan Data Baru</h1>
+          <h1>Edit Data Produk</h1>
         </Segment>
         <Segment basic>
           <Form>
@@ -117,9 +123,9 @@ export default class CreateProduk extends React.Component {
                 onChange={this.handleStockChange}
               />
             </Form.Field>
-            <Label size='large'>Berat Produk</Label>
+            <Label size="large">Berat Produk</Label>
             <FormField>
-            <Input
+              <Input
                 fluid
                 type="number"
                 value={this.state.berat}
@@ -137,9 +143,9 @@ export default class CreateProduk extends React.Component {
                 size="huge"
                 color="green"
                 icon="minus"
-                onClick={this.handleSubmitClick}
+                onClick={this.handleSubmitClick(this.state.id)}
               >
-                Tambahkan Produk
+                Edit Produk
               </Button>
             </Form.Field>
           </Form>

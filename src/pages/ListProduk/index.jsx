@@ -5,14 +5,14 @@ import {
   Gird,
   CardHeader,
   CardContent,
-  Button
+  Button,
 } from "semantic-ui-react";
 import React from "react";
 import Axios from "axios";
 
 export default class ListProduk extends React.Component {
   state = {
-    produk: []
+    produk: [],
   };
 
   componentDidMount = () => {
@@ -20,34 +20,34 @@ export default class ListProduk extends React.Component {
   };
 
   getData = () => {
-    Axios.get("https://backend-skripsi.herokuapp.com/produk", {
+    Axios.get("http://localhost:4000/produk", {
       headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    }).then(res => {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
       this.setState({
-        produk: res.data
+        produk: res.data,
       });
     });
   };
 
-  deleteData = id => {
-    Axios.delete(`https://backend-skripsi.herokuapp.com/produk/${id}`, {
+  deleteData = (id) => {
+    Axios.delete(`http://localhost:4000/produk/${id}`, {
       headers: {
-        authorization: `Bearer ${localStorage.getItem("token")}`
-      }
-    }).then(res => {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((res) => {
       this.getData();
     });
   };
 
-  handleButtonDeleteClick = id => {
+  handleButtonDeleteClick = (id) => {
     this.deleteData(id);
   };
 
   handleCardClick = (produk, urlImage) => {
-    produk.urlImage = urlImage;
-    this.props.history.push("/detailproduk", { produk });
+    produk.image_url = urlImage;
+    this.props.history.push("/editproduk", { produk });
   };
 
   render() {
@@ -62,6 +62,7 @@ export default class ListProduk extends React.Component {
                   <CardHeader>
                     <p>{produk.nama}</p>
                     <p>Stock : {produk.stock}</p>
+                    <p>Berat : {produk.berat}</p>
                   </CardHeader>
                 </Card.Content>
                 <CardContent>

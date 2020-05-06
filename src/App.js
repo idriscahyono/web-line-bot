@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import ListProduk from "./pages/ListProduk";
 import CreateProduk from "./pages/CreateProduk";
+import EditProduk from "./pages/EditProduk";
 import Login from "./pages/Login";
 import withAuth from "./withAuth";
 
 export default class App extends React.Component {
   state = {
-    activeItem: "WebChatbot"
+    activeItem: "WebChatbot",
   };
 
   handleLogout = () => {
@@ -19,7 +20,7 @@ export default class App extends React.Component {
 
   handleItemClick = (e, { name }) =>
     this.setState({
-      activeItem: name
+      activeItem: name,
     });
 
   render() {
@@ -62,12 +63,9 @@ export default class App extends React.Component {
             />
           </Menu>
           <Route path="/" exact component={Login} />
-          <Route
-            path="/createproduk"
-            exact
-            component={withAuth(CreateProduk)}
-          />
-          <Route path="/listproduk" exact component={withAuth(ListProduk)} />
+          <Route path="/createproduk" exact component={CreateProduk} />
+          <Route path="/listproduk" exact component={ListProduk} />
+          <Route path="/editproduk" exact component={EditProduk} />
           <Route path="/logout" exact component={Login} />
         </Router>
       </>
