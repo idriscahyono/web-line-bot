@@ -68,15 +68,10 @@ export default class EditProduk extends React.Component {
       Axios.post(
         `http://localhost:4000/produk/${this.state.id}/upload`,
         formData
-      )
-        .then(() => {
-          alert("Berhasil Edit Data Produk");
-          this.props.history.push("/listproduk");
-        })
-        .catch(() => {
-          alert("Berhasil Edit Data Produk");
-          this.props.history.push("/listproduk");
-        });
+      ).then(() => {
+        alert("Berhasil Edit Data Produk");
+        this.props.history.push("/listproduk");
+      });
     });
   };
 

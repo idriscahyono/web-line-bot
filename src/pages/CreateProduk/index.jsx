@@ -8,22 +8,34 @@ import {
   Grid,
   Segment,
   Label,
-  FormField
+  FormField,
+  Dropdown
 } from "semantic-ui-react";
 
 export default class CreateProduk extends React.Component {
   state = {
+    listjenis: [],
     nama: "",
+    jenis: "",
     harga: 0,
     stock: 0,
     berat: 0,
     image: null
+  };
+  componentDidMount = () => {
+    this.getJenisData();
   };
 
   handleNamaChange = event => {
     this.setState({
       nama: event.target.value
     });
+  };
+
+  handleJenisChange = event => {
+    this.setState({
+      jenis: event
+    })
   };
 
   handleHargaChange = event => {
@@ -44,12 +56,34 @@ export default class CreateProduk extends React.Component {
     })
   }
 
+  getJenisData=()=>{
+    Axios.get("http://localhost:4000/jenisProduk",{
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    })
+    .then((res)=>{
+      var options = []
+      res.data.map((listjenis)=>{
+        options.push({
+          text: listjenis.nama,
+          value: listjenis.nama
+        })
+      })
+      this.setState({
+        listjenis: options
+      })
+      console.log(options)
+    })
+  }
+
   handleSubmitClick = () => {
-    const { nama, harga, stock, berat, image } = this.state;
+    const { nama, harga, stock, berat, jenis} = this.state;
     Axios.post(
       "http://localhost:4000/produk",
       {
         nama,
+        jenis,
         harga,
         stock,
         berat
@@ -126,6 +160,16 @@ export default class CreateProduk extends React.Component {
                 placeholder="Tulis Berat"
                 onChange={this.handleBeratChange}
               />
+            </FormField>
+            <Label size='large'>Jenis Produk</Label>
+            <FormField>
+              <Dropdown
+                placeholder="Pilih Jenis"
+                selection
+                options={this.state.listjenis}
+                onChange={(event, data)=>this.handleJenisChange(data.value)}
+                >
+              </Dropdown>
             </FormField>
             <FormField>
               <Label size="large">Gambar</Label>
