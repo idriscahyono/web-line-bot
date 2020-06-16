@@ -9,6 +9,7 @@ import CreateJenisProduk from "./pages/CreateJenisProduk";
 import EditJenisProduk from "./pages/EditJenisProduk";
 import ListJenisProduk from "./pages/ListJenisProduk";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound"
 import withAuth from "./withAuth";
 
 export default class App extends React.Component {
@@ -28,13 +29,7 @@ export default class App extends React.Component {
 
   render() {
     const { activeItem } = this.state;
-    const NotFound = ()=>{
-      return(
-        <h3>
-          404 - Not Found
-        </h3>
-      )
-    }
+
     return (
       <>
       {!localStorage.getItem("token")?(
@@ -45,6 +40,7 @@ export default class App extends React.Component {
         <Route path="/editproduk" component={NotFound} />
         <Route path="/editjenisproduk" component={NotFound} />
         <Route path="/logout" component={NotFound} />
+        <Route path="/404" component={NotFound} />
       </Router>       
       ):(
         <Router>
@@ -100,6 +96,5 @@ export default class App extends React.Component {
       )} 
       </>
     );
-
   }
 }

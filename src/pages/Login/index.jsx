@@ -1,7 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import { Link } from 'react-router-dom';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
 export default class Login extends React.Component {
 	state = {

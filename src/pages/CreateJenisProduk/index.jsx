@@ -4,8 +4,6 @@ import {
   Input,
   Button,
   Form,
-  TextArea,
-  Grid,
   Segment,
   Label,
   FormField
@@ -56,7 +54,7 @@ export default class CreateJenisProduk extends React.Component {
   };
 
   render() {
-    return (
+    return ( 
       <>
         <Segment basic>
           <h1>Tambahkan Jenis Baru</h1>

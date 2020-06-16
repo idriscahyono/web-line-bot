@@ -2,7 +2,6 @@ import {
   Card,
   Image,
   Segment,
-  Gird,
   CardHeader,
   CardContent,
   Button,
