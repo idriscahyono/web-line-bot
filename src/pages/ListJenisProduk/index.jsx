@@ -20,7 +20,7 @@ import {
     };
   
     getData = () => {
-      Axios.get("http://localhost:4000/jenisProduk", {
+      Axios.get("https://backend-skripsi.herokuapp.com/jenisProduk", {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -32,7 +32,7 @@ import {
     };
   
     deleteData = (id) => {
-      Axios.delete(`http://localhost:4000/jenisProduk/${id}`, {
+      Axios.delete(`https://backend-skripsi.herokuapp.com/jenisProduk/${id}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,
         },

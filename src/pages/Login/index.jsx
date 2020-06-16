@@ -27,7 +27,7 @@ export default class Login extends React.Component {
 
 	handleSubmitClick = () => {
 		const { username, password } = this.state;
-		Axios.post('http://localhost:4000/user/login', {
+		Axios.post('https://backend-skripsi.herokuapp.com/user/login', {
 			username,
 			password
 		}).then((res) => {

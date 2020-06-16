@@ -23,7 +23,7 @@ export default class CreateJenisProduk extends React.Component {
   handleSubmitClick = () => {
     const { nama } = this.state;
     Axios.post(
-      "http://localhost:4000/jenisProduk",
+      "https://backend-skripsi.herokuapp.com/jenisProduk",
       {
         nama,
       },
@@ -38,7 +38,7 @@ export default class CreateJenisProduk extends React.Component {
       formData.append("image", this.state.image);
 
       Axios.post(
-        `http://localhost:4000/jenisProduk/${data._id}/upload`,
+        `https://backend-skripsi.herokuapp.com/jenisProduk/${data._id}/upload`,
         formData
       ).then(() => {
         alert("Berhasil Menambahkan Jenis Produk Baru");

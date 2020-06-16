@@ -49,7 +49,7 @@ export default class EditProduk extends React.Component {
   handleSubmitClick = (id) => {
     const { nama, harga, stock, berat, image } = this.state;
     Axios.put(
-      `http://localhost:4000/produk/${id}`,
+      `https://backend-skripsi.herokuapp.com/produk/${id}`,
       {
         nama,
         harga,
@@ -66,7 +66,7 @@ export default class EditProduk extends React.Component {
       const formData = new FormData();
       formData.append("image", this.state.image);
       Axios.post(
-        `http://localhost:4000/produk/${this.state.id}/upload`,
+        `https://backend-skripsi.herokuapp.com/produk/${this.state.id}/upload`,
         formData
       ).then(() => {
         alert("Berhasil Edit Data Produk");

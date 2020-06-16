@@ -55,7 +55,7 @@ export default class CreateProduk extends React.Component {
   }
 
   getJenisData=()=>{
-    Axios.get("http://localhost:4000/jenisProduk",{
+    Axios.get("https://backend-skripsi.herokuapp.com/jenisProduk",{
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       }
@@ -78,7 +78,7 @@ export default class CreateProduk extends React.Component {
   handleSubmitClick = () => {
     const { nama, harga, stock, berat, jenis} = this.state;
     Axios.post(
-      "http://localhost:4000/produk",
+      "https://backend-skripsi.herokuapp.com/produk",
       {
         nama,
         jenis,
@@ -97,7 +97,7 @@ export default class CreateProduk extends React.Component {
       formData.append("image", this.state.image);
 
       Axios.post(
-        `http://localhost:4000/produk/${data._id}/upload`,
+        `https://backend-skripsi.herokuapp.com/produk/${data._id}/upload`,
         formData
       ).then(() => {
         alert("Berhasil Menambahkan Data Baru");
